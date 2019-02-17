@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { login } from '../../util/APIUtils';
 
-export default class Login extends Component {
+class Login extends Component {
 
     constructor(props){
         super(props);        
@@ -16,13 +16,15 @@ export default class Login extends Component {
         const requestInfo = {password:this.password.value,email:this.email.value};
 
         login(requestInfo)
-                .then(response => {
-                    console.log("sucesso",response);
-                    return response;
-                }).catch(error => {
-                    this.setState({errors:error.message});
-                    console.log(error.message);
-                });
+            .then(response => {
+                console.log("sucesso",response);
+                return response;
+            }).catch(error => {
+                //this.setState({errors:error.message});
+                //console.log(error.message);
+                console.log(error);
+                this.props.history.push('/auth/signup')
+            });
 
                 /*
        login(requestInfo)
@@ -95,3 +97,5 @@ export default class Login extends Component {
         );
     }
 }
+
+export default withRouter(Login)

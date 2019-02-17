@@ -1,24 +1,44 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { signup } from '../../util/APIUtils';
 
 export default class SignUp extends Component {
+
+    constructor(props){
+        super(props);        
+        this.state = {errors:[]};
+    }
 
     envia(event){
         event.preventDefault();
 
-        const requestInfo = {
-            method:'POST',
-            body:JSON.stringify({login:this.login.value,senha:this.senha.value}),
-            headers:new Headers({
-                'Content-type' : 'application/json' 
-            })
-        };
-        
+        const requestInfo = {firstname:this.firstname.value,
+                              lastName:this.lastName.value,
+                                 email:this.email.value,
+                              password:this.password.value,
+                         matchpassword:this.matchpassword.value};
+
+        signup(requestInfo)
+            .then(response => {
+                console.log("sucesso",response);
+                this.props.history.push('/auth/login')
+                return response;
+            }).catch(error => {
+                this.setState({errors:error.message});
+                console.log(error.message);
+            });
     }
-    
+
     render(){
         return (
             <div class="p-5">
+                <div className={this.state.errors.length > 0 ? 'alert alert-danger' : ''} role="alert">
+                    <ul>
+                        {
+                            this.state.errors.map(error => (<li>{error}</li>))
+                        }                   
+                    </ul>
+                </div>
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>

@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN } from '../constants/general';
-import { API_AUTH_SIGNIN_URL} from '../constants/auth/index';
+import { API_AUTH_SIGNIN_URL, API_AUTH_SIGNUP_URL} from '../constants/auth/index';
 
 const request = (options) => {
     const headers = new Headers({
@@ -32,15 +32,15 @@ export function login(loginRequest) {
     });
 }
 
-/*
 export function signup(signupRequest) {
     return request({
-        url: API_BASE_URL + "/auth/signup",
+        url: API_AUTH_SIGNUP_URL,
         method: 'POST',
         body: JSON.stringify(signupRequest)
     });
 }
 
+/*
 export function checkUsernameAvailability(username) {
     return request({
         url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
