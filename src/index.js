@@ -7,12 +7,17 @@ import Auth from './components/auth/Auth'
 import Notfound from './notfound'
 import * as serviceWorker from './serviceWorker';
 import App from './App';
+import {createStore, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {auth} from './reducers/auth';
+
+const store = createStore(auth, applyMiddleware(thunkMiddleware));
 
 const routing = (
     <Router>
         <Switch>
             <Route exact path="/" component={App} />
-            <Route path="/auth" component={Auth} />
+            <Route path="/auth" render={props => <Auth store={store}/>} />
             <Route component={Notfound} />
         </Switch>
     </Router>

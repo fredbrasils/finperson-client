@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { login } from '../../util/APIUtils';
 
-class Login extends Component {
+export default class Login extends Component {
 
     constructor(props){
         super(props);        
         this.state = {errors:''};
+        console.log(props);
+        console.log(props.match.params.token);
+        
     }
 
     envia(event){
         event.preventDefault();
 
-        const {url} = this.props.match;
+        //const {url} = this.props.match;
         const requestInfo = {password:this.password.value,email:this.email.value};
 
         login(requestInfo)
@@ -52,10 +55,7 @@ class Login extends Component {
 
     render(){
         return (
-            <div className="p-5">
-                <div className={this.state.errors ? 'alert alert-danger' : ''} role="alert">
-                    {this.state.errors}
-                </div>
+            <div>
                 <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Login</h1>
                 </div>
@@ -97,5 +97,3 @@ class Login extends Component {
         );
     }
 }
-
-export default withRouter(Login)

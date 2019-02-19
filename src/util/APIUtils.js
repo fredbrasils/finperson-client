@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN } from '../constants/general';
-import { API_AUTH_SIGNIN_URL, API_AUTH_SIGNUP_URL} from '../constants/auth/index';
+import { API_AUTH_SIGNIN_URL} from '../constants/auth/index';
 
-const request = (options) => {
+export const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
     })
@@ -29,14 +29,6 @@ export function login(loginRequest) {
         url: API_AUTH_SIGNIN_URL,
         method: 'POST',
         body: JSON.stringify(loginRequest)
-    });
-}
-
-export function signup(signupRequest) {
-    return request({
-        url: API_AUTH_SIGNUP_URL,
-        method: 'POST',
-        body: JSON.stringify(signupRequest)
     });
 }
 
