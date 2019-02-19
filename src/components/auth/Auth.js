@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../css/finperson.min.css';
 import SignUp from './SignUp';
 import Login from './Login';
+import ForgotPassword from './ForgotPassword';
 import {Switch, Route, withRouter } from 'react-router-dom';
 import Notfound from '../../notfound';
 
@@ -30,7 +31,7 @@ class Auth extends Component {
                         <div className="col-xl-6 col-lg-8 col-md-5">
                             <div className="card o-hidden border-0 shadow-lg my-5">
                                 <div className="card-body p-0">
-                                    <div className="row justify-content-md-center">
+                                    <div className="row">
                                         <div className="col-md-12">
                                             <div className="p-5"> 
                                                 { (this.state.response.message !== null && this.state.response.message.length > 0) &&
@@ -45,6 +46,8 @@ class Auth extends Component {
                                                         render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/signup" 
                                                         render={props => <SignUp store={this.props.store}/>}/>
+                                                    <Route path="/auth/resetpassword" 
+                                                        render={props => <ForgotPassword store={this.props.store}/>}/>
                                                     <Route component={Notfound} />
                                                 </Switch>
                                             </div>

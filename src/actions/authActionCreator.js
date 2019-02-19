@@ -10,6 +10,10 @@ export function login(response){
     return {type:'login', response};
 }
 
+export function resetPassword(response){
+    return {type:'resetPassword', response};
+}
+
 export function cleanMessage(){
     return {type:'cleanMessage'};
 }

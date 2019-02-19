@@ -24,7 +24,7 @@ export function auth(state=[], action){
         
     }
     
-    if(action.type === 'confirmRegistration'){
+    if(action.type === 'confirmRegistration' || action.type === 'resetPassword'){
         // do nothing
     }
 

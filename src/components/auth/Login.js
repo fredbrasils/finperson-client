@@ -62,7 +62,7 @@ export default class Login extends Component {
                 </form>
                 <hr/>
                 <div className="text-center">
-                    <a className="small" href="forgot-password.html">Forgot Password?</a>
+                    <Link className="small" to="/auth/resetpassword" onClick={this.cleanMessage.bind(this)}>Forgot Password?</Link>
                 </div>
                 <div className="text-center">
                     <Link className="small" to="/auth/signup" onClick={this.cleanMessage.bind(this)}>Create an Account</Link>
