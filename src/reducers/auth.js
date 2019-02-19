@@ -1,9 +1,9 @@
 export function auth(state=[], action){
 
-    if(action.type === 'signup'){
+    let redirect = false;
+    let url = '';
 
-        let redirect = false;
-        let url = '';
+    if(action.type === 'signup'){
 
         if(action.response.success){
             redirect = true;
@@ -11,8 +11,13 @@ export function auth(state=[], action){
         }
 
         let response = Object.assign({}, action.response, {redirect,url});
-        return response;    
+        return response; 
     }
 
+    if(action.type === 'confirmRegistration'){
+        let response = Object.assign({}, action.response, {redirect,url});
+        return response;    
+    }
+    
     return state;
 }

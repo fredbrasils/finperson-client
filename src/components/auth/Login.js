@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { login } from '../../util/APIUtils';
+import AuthApi from '../../business/AuthApi';
 
 export default class Login extends Component {
 
     constructor(props){
-        super(props);        
-        this.state = {errors:''};
-        console.log(props);
-        console.log(props.match.params.token);
-        
+        super(props);
+    }
+
+    confirmRegistration(token){  
+  
+        if(token !== undefined && token !== null && token !== '') {
+            console.log("tem token",token);
+
+            const requestInfo = {token:token};
+            this.props.store.dispatch(AuthApi.confirmRegistration(requestInfo));
+        } 
+    }
+
+    componentDidMount(){
+        this.confirmRegistration(this.props.match.params.token);
     }
 
     envia(event){
@@ -28,29 +39,6 @@ export default class Login extends Component {
                 console.log(error);
                 this.props.history.push('/auth/signup')
             });
-
-                /*
-       login(requestInfo)
-            .then(response => {
-                if(response.ok) {
-                    
-                } else {
-                    console.log("error");
-                    throw new Error('não foi possível fazer o login');
-                }
-            })
-            .then(token => {
-                console.log("pegou token");
-                localStorage.setItem('auth-token',token);
-                //browserHistory.push('/home');
-            })
-            .catch(error => {
-                console.log("entrou no catch do error");
-                url.push('/home');
-                //browserHistory.push('/home');
-                //this.setState({msg:error.message});
-            });
-            */
     }
 
     render(){

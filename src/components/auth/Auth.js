@@ -20,11 +20,9 @@ class Auth extends Component {
                 this.props.history.push(resp.url);
             }
         });
-
     }
 
     render(){
-
         return (
             <div className="bg-gradient-primary">
                 <div className="container">
@@ -35,15 +33,15 @@ class Auth extends Component {
                                     <div className="row justify-content-md-center">
                                         <div className="col-md-12">
                                             <div className="p-5"> 
-                                                { (this.state.response !== null && this.state.response.message.length > 0) &&
+                                                { (this.state.response.message !== null && this.state.response.message.length > 0) &&
                                                     <div className={ this.state.response.success ? 'alert alert-primary' : 'alert alert-danger'} role="alert">
                                                         <ul>{this.state.response.message.map(msg => (<li key={msg}>{msg}</li>))}</ul>
                                                     </div>
                                                 }
                                                 <Switch>
-                                                    <Route path="/auth/login" component={Login} />
-                                                    <Route path="/auth/login/:token" 
-                                                        render={props => <Login store={this.props.store}/>} />
+                                                    <Route path="/auth/login/:token"
+                                                        render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
+                                                    <Route path="/auth/login" component={Login}/>
                                                     <Route path="/auth/signup" 
                                                         render={props => <SignUp store={this.props.store}/>}/>
                                                     <Route component={Notfound} />
