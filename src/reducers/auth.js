@@ -1,3 +1,5 @@
+import { ACCESS_TOKEN} from '../constants/general';
+
 export function auth(state=[], action){
 
     let redirect = false;
@@ -9,15 +11,28 @@ export function auth(state=[], action){
             redirect = true;
             url = '/auth/login';
         }
-
-        let response = Object.assign({}, action.response, {redirect,url});
-        return response; 
-    }
-
-    if(action.type === 'confirmRegistration'){
-        let response = Object.assign({}, action.response, {redirect,url});
-        return response;    
     }
     
-    return state;
+    if(action.type === 'login'){
+        
+        if(action.response.accessToken){
+            localStorage.setItem(ACCESS_TOKEN, action.response.accessToken);
+            redirect = true;
+            url = '/';
+            return Object.assign({}, {success:false, message:[], redirect, url});
+        }
+        
+    }
+    
+    if(action.type === 'confirmRegistration'){
+        // do nothing
+    }
+
+    if(action.type === 'cleanMessage'){
+        return Object.assign({}, {success:false, message:[], redirect:false, url:''});
+    }
+    
+    let response = Object.assign({}, action.response, {redirect,url});
+    return response;    
+    
 }

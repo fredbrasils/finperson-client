@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { login } from '../../util/APIUtils';
 import AuthApi from '../../business/AuthApi';
 
 export default class Login extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     confirmRegistration(token){  
   
         if(token !== undefined && token !== null && token !== '') {
-            console.log("tem token",token);
-
             const requestInfo = {token:token};
             this.props.store.dispatch(AuthApi.confirmRegistration(requestInfo));
         } 
@@ -23,22 +16,15 @@ export default class Login extends Component {
         this.confirmRegistration(this.props.match.params.token);
     }
 
-    envia(event){
+    login(event){
         event.preventDefault();
 
-        //const {url} = this.props.match;
         const requestInfo = {password:this.password.value,email:this.email.value};
+        this.props.store.dispatch(AuthApi.login(requestInfo));
+    }
 
-        login(requestInfo)
-            .then(response => {
-                console.log("sucesso",response);
-                return response;
-            }).catch(error => {
-                //this.setState({errors:error.message});
-                //console.log(error.message);
-                console.log(error);
-                this.props.history.push('/auth/signup')
-            });
+    cleanMessage(){
+        this.props.store.dispatch(AuthApi.cleanMessage());
     }
 
     render(){
@@ -47,7 +33,7 @@ export default class Login extends Component {
                 <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Login</h1>
                 </div>
-                <form className="user" onSubmit={this.envia.bind(this)}>
+                <form className="user" onSubmit={this.login.bind(this)}>
                     <div className="form-group">
                         <input type="email" ref={(input) => this.email = input} className="form-control form-control-user" 
                             id="exampleInputEmail" aria-describedby="emailHelp" 
@@ -79,7 +65,7 @@ export default class Login extends Component {
                     <a className="small" href="forgot-password.html">Forgot Password?</a>
                 </div>
                 <div className="text-center">
-                    <Link className="small" to="/auth/signup">Create an Account</Link>
+                    <Link className="small" to="/auth/signup" onClick={this.cleanMessage.bind(this)}>Create an Account</Link>
                 </div>
             </div>
         );

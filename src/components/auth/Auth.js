@@ -41,7 +41,8 @@ class Auth extends Component {
                                                 <Switch>
                                                     <Route path="/auth/login/:token"
                                                         render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
-                                                    <Route path="/auth/login" component={Login}/>
+                                                    <Route path="/auth/login"  
+                                                        render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/signup" 
                                                         render={props => <SignUp store={this.props.store}/>}/>
                                                     <Route component={Notfound} />

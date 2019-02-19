@@ -4,7 +4,7 @@ import AuthApi from '../../business/AuthApi';
 
 export default class SignUp extends Component {
 
-    envia(event){
+    signup(event){
         event.preventDefault();
 
         const requestInfo = {firstName:this.firstName.value,
@@ -16,13 +16,17 @@ export default class SignUp extends Component {
         this.props.store.dispatch(AuthApi.signup(requestInfo));        
     }
 
+    cleanMessage(){
+        this.props.store.dispatch(AuthApi.cleanMessage());
+    }
+    
     render(){
         return (
             <div> 
                 <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
-                <form className="user" onSubmit={this.envia.bind(this)}>
+                <form className="user" onSubmit={this.signup.bind(this)}>
                     <div className="form-group row">
                         <div className="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" ref={(input) => this.firstName = input} 
@@ -66,7 +70,7 @@ export default class SignUp extends Component {
                     <a className="small" href="forgot-password.html">Forgot Password?</a>
                 </div>
                 <div className="text-center">
-                    <Link className="small" to="/auth/login">Already have an account? Login!</Link>
+                    <Link className="small" to="/auth/login" onClick={this.cleanMessage.bind(this)}>Already have an account? Login!</Link>
                 </div>
             </div>
         );

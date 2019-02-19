@@ -1,5 +1,4 @@
 import { ACCESS_TOKEN } from '../constants/general';
-import { API_AUTH_SIGNIN_URL} from '../constants/auth/index';
 
 export const request = (options) => {
     const headers = new Headers({
@@ -24,22 +23,7 @@ export const request = (options) => {
             );
 };
 
-export function login(loginRequest) {
-    return request({
-        url: API_AUTH_SIGNIN_URL,
-        method: 'POST',
-        body: JSON.stringify(loginRequest)
-    });
-}
-
 /*
-export function checkUsernameAvailability(username) {
-    return request({
-        url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
-        method: 'GET'
-    });
-}
-
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
