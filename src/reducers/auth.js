@@ -24,8 +24,30 @@ export function auth(state=[], action){
         
     }
     
+    if(action.type === 'redirectUpdatePassword'){
+        
+        if(action.response.user){
+            redirect = true;
+            url = '/auth/updatepassword';
+            let resp = Object.assign({}, action.response, {success:false, message:[], redirect, url});
+            return resp;
+        }
+    }
+
+    if(action.type === 'updatePassword'){
+        
+        if(action.response.success){
+            redirect = true;
+            url = '/auth/login';
+        }
+    }
+
     if(action.type === 'confirmRegistration' || action.type === 'resetPassword'){
         // do nothing
+    }
+
+    if(action.type === 'redirectLogin'){
+        return Object.assign({}, {success:false, message:[], redirect:true, url:'/auth/login'});
     }
 
     if(action.type === 'cleanMessage'){

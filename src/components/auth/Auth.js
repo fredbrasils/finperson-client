@@ -3,6 +3,7 @@ import '../../css/finperson.min.css';
 import SignUp from './SignUp';
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';
+import UpdatePassword from './UpdatePassword';
 import {Switch, Route, withRouter } from 'react-router-dom';
 import Notfound from '../../notfound';
 
@@ -46,8 +47,12 @@ class Auth extends Component {
                                                         render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/signup" 
                                                         render={props => <SignUp store={this.props.store}/>}/>
+                                                    <Route path="/auth/resetpassword/:token/:id" 
+                                                        render={props => <ForgotPassword {...this.props} {...props} store={this.props.store}/>}/>    
                                                     <Route path="/auth/resetpassword" 
-                                                        render={props => <ForgotPassword store={this.props.store}/>}/>
+                                                        render={props => <ForgotPassword {...this.props} {...props} store={this.props.store}/>}/>
+                                                    <Route path="/auth/updatepassword" 
+                                                        render={props => <UpdatePassword dados={this.state.response} store={this.props.store}/>}/>
                                                     <Route component={Notfound} />
                                                 </Switch>
                                             </div>

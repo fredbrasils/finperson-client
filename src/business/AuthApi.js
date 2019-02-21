@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { request } from '../util/APIUtils';
 import { API_AUTH_SIGNUP_URL, API_AUTH_CONFIRM_REGISTRATION_URL,
-         API_AUTH_SIGNIN_URL, API_AUTH_RESET_PASSWORD_URL} from '../constants/auth/index';
-import {signup, confirmRegistration, resetPassword,
-        login, cleanMessage} from '../actions/authActionCreator';
+         API_AUTH_SIGNIN_URL, API_AUTH_RESET_PASSWORD_URL,
+         API_AUTH_CONFIRM_RESET_PASSWORD_URL, API_AUTH_UPDATE_PASSWORD_URL} from '../constants/auth/index';
+import {signup, confirmRegistration, resetPassword, updatePassword,
+        login, redirectUpdatePassword, cleanMessage, redirectLogin} from '../actions/authActionCreator';
 
 export default class AuthApi extends Component {
 
@@ -79,6 +80,49 @@ export default class AuthApi extends Component {
                     dispatch(resetPassword(error));
                     return error;
                 });
+        }
+    }
+
+    static redirectUpdatePassword(requestInfo){
+
+        return dispatch => {
+            request({
+                    url: API_AUTH_CONFIRM_RESET_PASSWORD_URL + `?token=${requestInfo.token}&id=${requestInfo.id}`,
+                    method: 'GET'
+                })
+                .then(response => {  
+                    dispatch(redirectUpdatePassword(response));
+                    return response;
+                })
+                .catch(error => {
+                    dispatch(redirectUpdatePassword(error));
+                    return error;
+                });
+        }
+    }
+
+    static updatePassword(requestInfo){
+
+        return dispatch => {
+            request({
+                    url: API_AUTH_UPDATE_PASSWORD_URL,
+                    method: 'POST',
+                    body: JSON.stringify(requestInfo)
+                })
+                .then(response => {                    
+                    dispatch(updatePassword(response));
+                    return response;
+                })
+                .catch(error => {
+                    dispatch(updatePassword(error));
+                    return error;
+                });
+        }
+    }
+    
+    static redirectLogin(){
+        return dispatch => {
+            dispatch(redirectLogin());
         }
     }
 

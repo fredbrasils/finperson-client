@@ -4,6 +4,19 @@ import AuthApi from '../../business/AuthApi';
 
 export default class ForgotPassword extends Component {
 
+    redirectUpdatePassword(token, id){  
+  
+        if(token !== undefined && token !== null && token !== ''
+        && id !== undefined && id !== null && id !== '') {
+            const requestInfo = {token:token,id:id};
+            this.props.store.dispatch(AuthApi.redirectUpdatePassword(requestInfo));
+        } 
+    }
+
+    componentDidMount(){
+        this.redirectUpdatePassword(this.props.match.params.token, this.props.match.params.id);
+    }
+
     resetPassword(event){
         event.preventDefault();
 
