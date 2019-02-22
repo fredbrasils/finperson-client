@@ -4,6 +4,7 @@ export function auth(state=[], action){
 
     let redirect = false;
     let url = '';
+    let loading = false;
 
     if(action.type === 'signup'){
 
@@ -19,7 +20,7 @@ export function auth(state=[], action){
             localStorage.setItem(ACCESS_TOKEN, action.response.accessToken);
             redirect = true;
             url = '/';
-            return Object.assign({}, {success:false, message:[], redirect, url});
+            return Object.assign({}, {success:false, message:[], redirect, url,loading});
         }
         
     }
@@ -29,7 +30,7 @@ export function auth(state=[], action){
         if(action.response.user){
             redirect = true;
             url = '/auth/updatepassword';
-            let resp = Object.assign({}, action.response, {success:false, message:[], redirect, url});
+            let resp = Object.assign({}, action.response, {success:false, message:[], redirect, url,loading});
             return resp;
         }
     }
@@ -47,14 +48,14 @@ export function auth(state=[], action){
     }
 
     if(action.type === 'redirectLogin'){
-        return Object.assign({}, {success:false, message:[], redirect:true, url:'/auth/login'});
+        return Object.assign({}, {success:false, message:[], redirect:true, url:'/auth/login',loading});
     }
 
     if(action.type === 'cleanMessage'){
-        return Object.assign({}, {success:false, message:[], redirect:false, url:''});
+        return Object.assign({}, {success:false, message:[], redirect:false, url:'',loading});
     }
     
-    let response = Object.assign({}, action.response, {redirect,url});
+    let response = Object.assign({}, action.response, {redirect,url,loading});
     return response;    
     
 }

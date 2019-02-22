@@ -8,6 +8,7 @@ export default class ForgotPassword extends Component {
   
         if(token !== undefined && token !== null && token !== ''
         && id !== undefined && id !== null && id !== '') {
+            this.props.showLoading();
             const requestInfo = {token:token,id:id};
             this.props.store.dispatch(AuthApi.redirectUpdatePassword(requestInfo));
         } 
@@ -19,12 +20,13 @@ export default class ForgotPassword extends Component {
 
     resetPassword(event){
         event.preventDefault();
-
+        this.props.showLoading();
         const requestInfo = {email:this.email.value};
         this.props.store.dispatch(AuthApi.resetPassword(requestInfo));
     }
 
     cleanMessage(){
+        this.props.showLoading();
         this.props.store.dispatch(AuthApi.cleanMessage());
     }
 

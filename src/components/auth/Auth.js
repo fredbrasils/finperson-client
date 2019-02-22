@@ -6,14 +6,13 @@ import ForgotPassword from './ForgotPassword';
 import UpdatePassword from './UpdatePassword';
 import {Switch, Route, withRouter } from 'react-router-dom';
 import Loading from '../spinner/Loading';
-import FadeLoaderSpinner from '../spinner/FadeLoaderSpinner';
 import Notfound from '../../notfound';
 
 class Auth extends Component {
 
     constructor(props){
         super(props);        
-        this.state = {response:{success:'', message:[], redirect:false, url:''}};
+        this.state = {response:{success:'', message:[], redirect:false, url:'', loading:false}};
     }
 
     componentWillMount(){
@@ -26,6 +25,15 @@ class Auth extends Component {
         });
     }
 
+    showLoading(){
+        let state = Object.assign({}, this.props.store.getState(), {loading:true});
+        this.setState({response:state});
+    }
+
+    loading(){
+        return this.state.response.loading;
+    }
+
     render(){
         return (
             <div className="bg-gradient-primary">
@@ -36,26 +44,26 @@ class Auth extends Component {
                                 <div className="card-body p-0">
                                     <div className="row">
                                         <div className="col-md-12">
+                                            <Loading loading = {this.loading.bind(this)} {...this.props}/>
                                             <div className="p-5"> 
-                                                { (this.state.response.message !== null && this.state.response.message.length > 0) &&
+                                                { (this.state.response.message && this.state.response.message.length > 0) &&
                                                     <div className={ this.state.response.success ? 'alert alert-primary' : 'alert alert-danger'} role="alert">
                                                         <ul>{this.state.response.message.map(msg => (<li key={msg}>{msg}</li>))}</ul>
                                                     </div>
                                                 }
-                                                <FadeLoaderSpinner {...this.props}/>
                                                 <Switch>
                                                     <Route path="/auth/login/:token"
-                                                        render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
+                                                        render={props => <Login showLoading={this.showLoading.bind(this)} {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/login"  
-                                                        render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
+                                                        render={props => <Login showLoading={this.showLoading.bind(this)} {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/signup" 
-                                                        render={props => <SignUp store={this.props.store}/>}/>
+                                                        render={props => <SignUp showLoading={this.showLoading.bind(this)} store={this.props.store}/>}/>
                                                     <Route path="/auth/resetpassword/:token/:id" 
-                                                        render={props => <ForgotPassword {...this.props} {...props} store={this.props.store}/>}/>    
+                                                        render={props => <ForgotPassword showLoading={this.showLoading.bind(this)} {...this.props} {...props} store={this.props.store}/>}/>    
                                                     <Route path="/auth/resetpassword" 
-                                                        render={props => <ForgotPassword {...this.props} {...props} store={this.props.store}/>}/>
+                                                        render={props => <ForgotPassword showLoading={this.showLoading.bind(this)} {...this.props} {...props} store={this.props.store}/>}/>
                                                     <Route path="/auth/updatepassword" 
-                                                        render={props => <UpdatePassword dados={this.state.response} store={this.props.store}/>}/>
+                                                        render={props => <UpdatePassword showLoading={this.showLoading.bind(this)} dados={this.state.response} store={this.props.store}/>}/>
                                                     <Route component={Notfound} />
                                                 </Switch>
                                             </div>

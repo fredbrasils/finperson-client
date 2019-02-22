@@ -10,6 +10,7 @@ export default class UpdatePassword extends Component {
 
     updatePassword(event){
         event.preventDefault();
+        this.props.showLoading();
         const requestInfo = {       id:this.dados.user.id,
                                  token:this.dados.token,
                              firstName:this.dados.user.firstName,
@@ -24,6 +25,7 @@ export default class UpdatePassword extends Component {
     redirectLogin(dados){  
   
         if(dados.user === undefined || dados.user === null || dados.user === '') {
+            this.props.showLoading();
             this.props.store.dispatch(AuthApi.redirectLogin());
         } 
     }

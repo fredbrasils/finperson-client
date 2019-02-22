@@ -7,6 +7,7 @@ export default class SignUp extends Component {
     signup(event){
         event.preventDefault();
 
+        this.props.showLoading();
         const requestInfo = {firstName:this.firstName.value,
                               lastName:this.lastName.value,
                                  email:this.email.value,
@@ -17,6 +18,7 @@ export default class SignUp extends Component {
     }
 
     cleanMessage(){
+        this.props.showLoading();
         this.props.store.dispatch(AuthApi.cleanMessage());
     }
     

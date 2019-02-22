@@ -7,6 +7,7 @@ export default class Login extends Component {
     confirmRegistration(token){  
   
         if(token !== undefined && token !== null && token !== '') {
+            this.props.showLoading();
             const requestInfo = {token:token};
             this.props.store.dispatch(AuthApi.confirmRegistration(requestInfo));
         } 
@@ -19,11 +20,13 @@ export default class Login extends Component {
     login(event){
         event.preventDefault();
 
+        this.props.showLoading();
         const requestInfo = {password:this.password.value,email:this.email.value};
         this.props.store.dispatch(AuthApi.login(requestInfo));
     }
 
     cleanMessage(){
+        this.props.showLoading();
         this.props.store.dispatch(AuthApi.cleanMessage());
     }
 

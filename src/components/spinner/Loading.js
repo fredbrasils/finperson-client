@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { FadeLoader} from 'react-spinners';
 
-export default class FadeLoaderSpinner extends Component {
-
-    constructor(props){
-        super(props);        
-        this.state = {loading:false};
-    }
+export default class Loading extends Component {
 
     render(){
         const divBackgroudSpinner = {
             position: 'absolute',
             height: '105%',
             width:  '100%',
-            margin: '-4rem',
+            margin: '-1rem',
             'backgroundColor': 'gray',
             'opacity': '0.5',
             'filter': 'alpha(opacity=50)',
@@ -31,12 +26,12 @@ export default class FadeLoaderSpinner extends Component {
         return (
             <>
                 {
-                    (this.state.loading) &&
+                    (this.props.loading()) &&
                     <div style={divBackgroudSpinner}>
                         <div className="d-flex justify-content-center" style={spinnerDiv}> 
                             <FadeLoader
                                 color={'#E0641A'}
-                                loading={this.state.loading}
+                                loading={this.props.loading()}
                                 height = {10}
                                 heightUnit = {"px"}
                                 width = {100}
