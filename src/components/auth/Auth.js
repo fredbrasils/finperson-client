@@ -5,6 +5,8 @@ import Login from './Login';
 import ForgotPassword from './ForgotPassword';
 import UpdatePassword from './UpdatePassword';
 import {Switch, Route, withRouter } from 'react-router-dom';
+import Loading from '../spinner/Loading';
+import FadeLoaderSpinner from '../spinner/FadeLoaderSpinner';
 import Notfound from '../../notfound';
 
 class Auth extends Component {
@@ -40,6 +42,7 @@ class Auth extends Component {
                                                         <ul>{this.state.response.message.map(msg => (<li key={msg}>{msg}</li>))}</ul>
                                                     </div>
                                                 }
+                                                <FadeLoaderSpinner {...this.props}/>
                                                 <Switch>
                                                     <Route path="/auth/login/:token"
                                                         render={props => <Login  {...this.props} {...props} store={this.props.store}/>}/>
