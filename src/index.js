@@ -16,8 +16,8 @@ const store = createStore(auth, applyMiddleware(thunkMiddleware));
 const routing = (
     <Router>
         <Switch>
-            <Route exact path="/" component={App} />
             <Route path="/auth" render={props => <Auth store={store}/>} />
+            <Route path="/" component={App} />
             <Route component={Notfound} />
         </Switch>
     </Router>

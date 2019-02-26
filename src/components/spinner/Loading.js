@@ -32,7 +32,7 @@ export default class Loading extends Component {
                             <FadeLoader
                                 color={'#E0641A'}
                                 loading={this.props.loading()}
-                                height = {10}
+                                height = {5}
                                 heightUnit = {"px"}
                                 width = {100}
                                 widthUnit = {"px"}
