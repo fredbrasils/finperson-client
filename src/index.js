@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Auth from './components/auth/Auth'
 import Notfound from './notfound'
 import * as serviceWorker from './serviceWorker';
@@ -10,14 +10,33 @@ import App from './App';
 import {createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {auth} from './reducers/auth';
+import {isAuthenticated} from './util/APIUtils';
 
 const store = createStore(auth, applyMiddleware(thunkMiddleware));
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated() ? (
+          <Component {...props} store={store}/>
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/auth/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
 
 const routing = (
     <Router>
         <Switch>
             <Route path="/auth" render={props => <Auth store={store}/>} />
-            <Route path="/" component={App} />
+            <PrivateRoute path="/" component={App} />
             <Route component={Notfound} />
         </Switch>
     </Router>

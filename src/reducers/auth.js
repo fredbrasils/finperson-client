@@ -19,7 +19,7 @@ export function auth(state=[], action){
         if(action.response.accessToken){
             localStorage.setItem(ACCESS_TOKEN, action.response.accessToken);
             redirect = true;
-            url = '/';
+            url = '/dashboard';
             return Object.assign({}, {success:false, message:[], redirect, url,loading});
         }
         
