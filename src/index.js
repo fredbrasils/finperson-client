@@ -7,12 +7,14 @@ import Auth from './components/auth/Auth'
 import Notfound from './notfound'
 import * as serviceWorker from './serviceWorker';
 import App from './App';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {auth} from './reducers/auth';
+import {category} from './reducers/category';
 import {isAuthenticated} from './util/APIUtils';
 
-const store = createStore(auth, applyMiddleware(thunkMiddleware));
+const reducers = combineReducers({auth,category});
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route

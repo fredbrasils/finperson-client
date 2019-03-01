@@ -17,7 +17,7 @@ class Auth extends Component {
 
     componentWillMount(){
         this.props.store.subscribe( () => {
-            const resp = this.props.store.getState();
+            const resp = this.props.store.getState().auth;
             this.setState({response:resp});
             if(resp.redirect){
                 this.props.history.push(resp.url);
@@ -26,7 +26,7 @@ class Auth extends Component {
     }
 
     showLoading(){
-        let state = Object.assign({}, this.props.store.getState(), {loading:true});
+        let state = Object.assign({}, this.props.store.getState().auth, {loading:true});
         this.setState({response:state});
     }
 
