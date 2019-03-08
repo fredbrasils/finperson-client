@@ -50,3 +50,25 @@ ReactDOM.render(routing, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+/*
+const mapStateToProps = store => {
+    return {response: store.auth}
+  };
+
+  const mapDispatchToProps = dispatch => {
+      return {
+          action : (parametro) => {
+            dispatch(AuthApi.action);
+          },
+          outraAction : (parametro) => {
+            dispatch(AuthApi.outraAction);
+          }
+      }
+  }
+   
+  //bindActionCreators({ clickButton }, dispatch);
+
+export default connect(mapStateToProps)(Auth);
+
+*/

@@ -3,15 +3,21 @@ import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
 
 class ColorPicker extends React.Component {
-  state = {
-    displayColorPicker: false,
-    color: {
-      r: '241',
-      g: '112',
-      b: '19',
-      a: '1',
-    },
-  };
+  
+  constructor(props) {
+    super(props);
+    this.color = props.color;
+    this.state = {
+      displayColorPicker: false,
+      color: {
+        r: this.color ? this.color.split('-')[0] : '241',
+        g: this.color ? this.color.split('-')[1] : '112',
+        b: this.color ? this.color.split('-')[2] : '19',
+        a: this.color ? this.color.split('-')[3] : '1',
+      }
+    };
+  }
+
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
