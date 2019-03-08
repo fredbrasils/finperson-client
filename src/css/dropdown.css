@@ -1,0 +1,70 @@
+.dropbtn {
+    background-color: #f8f9fc;
+    padding: 16px;
+    font-size: 13px;
+    border: none;
+    border-color: black;
+    cursor: pointer;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #dae2e4;
+  }
+  
+  .dropbtn i{
+    margin-right: 15px;
+  }
+
+  #myInput {
+    border-box: box-sizing;
+    /*background-image: url('searchicon.png');*/
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 14px;
+    padding: 5px 0px 5px 5px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    max-width: 80px;
+  }
+  
+  #myInput:focus {outline: 3px solid #ddd;}
+  
+  .dropdown-fontawesome {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 82px;
+    max-height: 120px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+    margin-top: 31px;
+  }
+
+  .dropdown-content-input {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 2;
+    
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
