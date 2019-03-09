@@ -10415,9 +10415,8 @@ a:focus {
 
 .scroll-to-top {
   position: fixed;
-  right: 1rem;
+  right: -30rem;
   bottom: 1rem;
-  display: none;
   width: 2.75rem;
   height: 2.75rem;
   text-align: center;
@@ -10436,6 +10435,40 @@ a:focus {
 
 .scroll-to-top i {
   font-weight: 800;
+}
+
+.hideScroll {
+  display: inline;
+  right: 1rem;
+  -webkit-animation: slide-out 3s forwards;
+  animation: slide-out 3s forwards;
+}
+
+@-webkit-keyframes slide-out {
+  100% { right: -30rem;}
+ }
+ 
+ @keyframes slide-out {
+  100% { right: -30rem;}
+ }
+
+.showScroll {
+  display: inline;
+  -webkit-animation: slide-in 1s forwards;
+  animation: slide-in 1s forwards;
+}
+
+.animation-grow-in {
+  -webkit-animation: growIn 1s forwards;
+  animation: growIn 1s forwards;
+}
+
+@-webkit-keyframes slide-in {
+ 100% { right: 1rem;}
+}
+
+@keyframes slide-in {
+ 100% { right: 1rem; }
 }
 
 @-webkit-keyframes growIn {

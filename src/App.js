@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './css/finperson.min.css';
+//import './css/finperson.min.css';
+import './css/finperson.css';
 import Menu from './components/menu/Menu';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -11,7 +12,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {scrollDisplay:'inline'};
+    this.state = {classScroll:'hideScroll'};
     this.handleScroll = this.handleScroll.bind(this);
   }
 
@@ -33,9 +34,9 @@ class App extends Component {
     let scrollTop = document.documentElement.scrollTop;
     
     if(scrollTop > 100){
-      this.setState({ scrollDisplay: 'inline' });
+      this.setState({ classScroll: 'showScroll' });
     }else{
-      this.setState({ scrollDisplay: 'none' });
+      this.setState({ classScroll: 'hideScroll' });
     }
     
   }
@@ -63,7 +64,7 @@ class App extends Component {
 
             </div>
 
-            <a className="scroll-to-top rounded" style={{display:this.state.scrollDisplay}} onClick={this.scrollToTop.bind(this)}>
+            <a className={"scroll-to-top rounded " + this.state.classScroll} onClick={this.scrollToTop.bind(this)}>
               <i className="fas fa-angle-up"></i>
             </a>
 

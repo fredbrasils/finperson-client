@@ -6,14 +6,13 @@ class ColorPicker extends React.Component {
   
   constructor(props) {
     super(props);
-    this.color = props.color;
     this.state = {
       displayColorPicker: false,
       color: {
-        r: this.color ? this.color.split('-')[0] : '241',
-        g: this.color ? this.color.split('-')[1] : '112',
-        b: this.color ? this.color.split('-')[2] : '19',
-        a: this.color ? this.color.split('-')[3] : '1',
+        r: props.color ? props.color.split('-')[0] : '241',
+        g: props.color ? props.color.split('-')[1] : '112',
+        b: props.color ? props.color.split('-')[2] : '19',
+        a: props.color ? props.color.split('-')[3] : '1',
       }
     };
   }
@@ -28,7 +27,8 @@ class ColorPicker extends React.Component {
   };
 
   handleChange = (color) => {
-    this.setState({ color: color.rgb })
+    this.setState({ color: color.rgb });
+    this.props.changeColorParent(color.rgb);
   };
 
   render() {
