@@ -27,31 +27,29 @@ class Categories extends Component {
   render() {
     
     return (
-        <div className="container-fluid">
+        <div className="container-fluid container">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Category</h1>
                 <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
             <div className="row">
                 <div className="col">
-                    <div className="card o-hidden border-0 shadow-lg my-1">
-                        <div className="card-body p-4">
-                            <div className="row">
-                                <div className="col-6">
-                                    <input type="text" className="form-control" id="name" placeholder="Category's name"/>
-                                </div>
-                                <div className="col-1">
-                                    <button type="submit" className="btn btn-info"><i className="fas fa-plus"></i></button>
-                                </div>
+                    <div className="card-body p-4">
+                        <div className="row">
+                            <div className="col-6">
+                                <input type="text" className="form-control" id="name" placeholder="Category's name"/>
                             </div>
-                            
-                            <hr/>
-
-                            { (this.state.categories && this.state.categories.length > 0) &&
-                                this.state.categories.map(category => (<Category key={category.id} category={category}/>))
-                            }
-
+                            <div className="col-1">
+                                <button type="submit" className="btn btn-info"><i className="fas fa-plus"></i></button>
+                            </div>
                         </div>
+                        
+                        <hr/>
+
+                        { (this.state.categories && this.state.categories.length > 0) &&
+                            this.state.categories.map(category => (<Category key={category.id} category={category}/>))
+                        }
+
                     </div>
                 </div>
             </div>

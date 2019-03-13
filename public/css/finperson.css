@@ -10382,6 +10382,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -11861,4 +11863,25 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+.container-icons{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.container-icons div{
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.container-icons div:hover {
+  background-color: #dae2e4;
+  cursor: pointer;
 }

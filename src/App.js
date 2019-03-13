@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-//import './css/finperson.min.css';
-import './css/finperson.css';
 import Menu from './components/menu/Menu';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';

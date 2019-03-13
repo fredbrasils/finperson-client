@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../css/finperson.min.css';
 import SignUp from './SignUp';
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';

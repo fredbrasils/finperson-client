@@ -1,6 +1,6 @@
 import React from 'react'
 import reactCSS from 'reactcss'
-import { SketchPicker } from 'react-color'
+import { ChromePicker } from 'react-color'
 
 class ColorPicker extends React.Component {
   
@@ -46,9 +46,9 @@ class ColorPicker extends React.Component {
         },
         popover: {
           position: 'absolute',
-          zIndex: '9999',
+          zIndex: '3',
           top: '-250%',
-          left: '-3px',
+          left: '60px',
         },
         cover: {
           position: 'fixed',
@@ -64,14 +64,13 @@ class ColorPicker extends React.Component {
       <div className="row">
         <div className="col-auto">
             <div style={ styles.color } onClick={ this.handleClick } />
+            { this.state.displayColorPicker ?
+                  <div style={ styles.popover }>
+                      <div style={ styles.cover } onClick={ this.handleClose }/>
+                      <ChromePicker color={ this.state.color } onChange={ this.handleChange } />
+                  </div> 
+                : null }
         </div>
-        { this.state.displayColorPicker ?
-            <div className="col-auto"> 
-                <div style={ styles.popover }>
-                    <div style={ styles.cover } onClick={ this.handleClose }/>
-                    <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
-                </div> 
-            </div>: null }
 
       </div>
     )
