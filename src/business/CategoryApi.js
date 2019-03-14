@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { request } from '../util/APIUtils';
-import { API_CATEGORY_FIND_ALL_URL, API_CATEGORY_INSERT_URL} from '../constants/category/index';
-import {findAll, insert} from '../actions/categoryActionCreator';
+import { API_CATEGORY_FIND_ALL_URL, API_CATEGORY_INSERT_URL,
+    API_CATEGORY_UPDATE_URL} from '../constants/category/index';
+import {findAll, insert, update} from '../actions/categoryActionCreator';
 
 export default class CategoryApi extends Component {
 
@@ -42,4 +43,22 @@ export default class CategoryApi extends Component {
         }
     }
 
+    static update(requestInfo){
+
+        return dispatch => {
+            request({
+                    url: API_CATEGORY_UPDATE_URL,
+                    method: 'POST',
+                    body: JSON.stringify(requestInfo)
+                })
+                .then(response => {                    
+                    dispatch(update(response));
+                    return response;
+                })
+                .catch(error => {
+                    dispatch(update(error));
+                    return error;
+                });
+        }
+    }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Category from './Category';
 import CategoryApi from '../../business/CategoryApi';
 import CategoryCreate from './Category-create';
+import ReactDOM from 'react-dom';
 
 class Categories extends Component {
 
@@ -31,6 +32,11 @@ class Categories extends Component {
         this.props.store.dispatch(CategoryApi.insert(category));
     }
 
+    updateCategory = (category) => {
+        console.log(category);
+        //this.props.store.dispatch(CategoryApi.update(category));
+    }
+
     componentDidMount(){
         this.loadCategories();
     }
@@ -39,6 +45,18 @@ class Categories extends Component {
         this.setState({create: !this.state.create});
     }
 
+    /*
+    unmountChild = () => {
+        
+        console.log("teste",ReactDOM.findDOMNode("categoryCreate"));
+
+        if(this.refs.categoryCreate){
+            let mountNode = ReactDOM.findDOMNode(this.refs.categoryCreate);
+            let unmount = ReactDOM.unmountComponentAtNode(mountNode);
+            console.log(unmount);
+        }
+    }
+*/
   render() {
     
     return (
@@ -52,17 +70,20 @@ class Categories extends Component {
                         <button type="submit" className="btn btn-info" onClick={this.openCategoryModel}>
                             <i className="fas fa-plus"></i>
                         </button>
-                        {   this.state.create &&
+                        {   this.state.create ?
                             <CategoryCreate {...this.props} hideModel={this.openCategoryModel} createCategory={this.createCategory}/>
+                            : null
                         }
                     </div>
                 </div>
-                <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                {/*
+                    <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                */}
             </div>
             <div className="row">
                 <div className="col">
                     <div className="card-body p-4">
-                        <div className="row">
+                        <div className="row ">
                             <div className="col-6">
                                 <input type="text" className="form-control" id="name" placeholder="Search..."/>
                             </div>
@@ -73,8 +94,27 @@ class Categories extends Component {
                         
                         <hr/>
 
-                        { (this.state.categories && this.state.categories.length > 0) &&
-                            this.state.categories.map(category => (<Category key={category.id} category={category}/>))
+                        { (this.state.categories && this.state.categories.length > 0) ?
+                            this.state.categories.map(category => (<Category key={category.id} 
+                                category={category} updateCategory={this.updateCategory}/>))
+                            :
+                            <div className="container">
+                                <div className="row justify-content-center m-5">
+                                    <div className="col-auto">
+                                        <i className="far fa-sad-tear fa-10x text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div className="row justify-content-center">
+                                    <div className="col-auto">
+                                        <h4 className="h4 text-gray-800">
+                                            There is not category 
+                                            <small className="text-muted">
+                                                <a style={{cursor:'pointer'}} onClick={this.openCategoryModel}> click here! </a>
+                                            </small>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div> 
                         }
 
                     </div>

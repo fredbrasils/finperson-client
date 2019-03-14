@@ -26,6 +26,18 @@ class CategoryEdit extends Component {
         this.setState(Object.assign({}, this.state, {category:category}));
     }
 
+    updateCategory = () =>{
+
+        if(!this.name.value || this.name.value.trim() === ''){
+            this.setState({message : "Inform category's name."});
+            return false;
+        }else{
+            this.state.category.name = this.name.value.trim();
+        }
+
+        this.props.updateCategory(this.state.category);
+    }
+
     render() {
     
         return (
@@ -46,14 +58,18 @@ class CategoryEdit extends Component {
                 </div>
 
                 <div className="col-lg-7 col-md-5">
-                    <input type="text" className="form-control" id="name" defaultValue={this.state.category.name}/>
+                    <input type="text" className="form-control" id="name" 
+                        ref={(input) => this.name = input}
+                        defaultValue={this.state.category.name}/>
                 </div>
 
                 <div className="col-3">
                     <div className="row">        
                         <div className="col-lg-7 col-md-1 p4" onClick={this.props.toggle}></div>
                         <div className="col-lg-1 col-md-1 mr-auto">
-                            <a style={{cursor: 'pointer'}}><i className="fas fa-check fa-2x"></i></a>
+                            <a style={{cursor: 'pointer'}} onClick={this.updateCategory}>
+                                <i className="fas fa-check fa-2x"></i>
+                            </a>
                         </div>
                         <div className="col-lg-1 col-md-1">
                             <a style={{cursor: 'pointer'}} onClick={this.cancel.bind(this)}><i className="fas fa-times fa-2x"></i></a>

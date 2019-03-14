@@ -49,7 +49,8 @@ class Category extends Component {
                 <div style={styles.color} className={this.state.collapse ? "d-block card-header py-3 collapsed" : "d-block card-header py-3"}>
 
                     {   this.state.edit ? 
-                        <CategoryEdit category={this.state.category} changeColor={this.changeColor.bind(this)} edit={this.editCategory.bind(this)} toggle={this.toggle.bind(this)}/>   
+                        <CategoryEdit category={this.state.category} changeColor={this.changeColor.bind(this)} 
+                        edit={this.editCategory.bind(this)} toggle={this.toggle.bind(this)} {...this.props}/>   
                       : <CategoryShow category={this.state.category} edit={this.editCategory.bind(this)} toggle={this.toggle.bind(this)}/>   
                     }    
                     
