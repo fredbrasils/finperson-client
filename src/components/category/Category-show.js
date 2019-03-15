@@ -6,8 +6,10 @@ class CategoryShow extends Component {
         super(props);
     }
 
-    edit(){
-        this.props.edit(true);
+    edit = () => {
+        if(this.props.edit){
+            this.props.edit(true);
+        }
     }
 
     render() {
@@ -23,7 +25,7 @@ class CategoryShow extends Component {
                     <h4 className="m-0 font-weight-bold text-primary">{this.props.category.name}</h4>
                 </div>
                 <div className="col-auto">
-                    <a style={{cursor: 'pointer'}} onClick={this.edit.bind(this)} ><i className="fas fa-edit fa-2x"></i></a>
+                    <a style={{cursor: 'pointer'}} onClick={this.edit} ><i className="fas fa-edit fa-2x"></i></a>
                 </div>
                 <div className="col-auto">
                     <a style={{cursor: 'pointer'}}><i className="fas fa-trash-alt fa-2x"></i></a>

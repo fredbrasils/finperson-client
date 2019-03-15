@@ -43,7 +43,7 @@ export default class CategoryApi extends Component {
         }
     }
 
-    static update(requestInfo){
+    static update(requestInfo, callback){
 
         return dispatch => {
             request({
@@ -58,6 +58,10 @@ export default class CategoryApi extends Component {
                 .catch(error => {
                     dispatch(update(error));
                     return error;
+                }).then(resp => {
+                    if(callback){
+                        callback(resp);
+                    }
                 });
         }
     }

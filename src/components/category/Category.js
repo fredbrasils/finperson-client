@@ -9,28 +9,37 @@ class Category extends Component {
         super(props);
         this.state = { collapse: false,
                            edit: false, 
-                       category:props.category
+                       category:props.category,
+                        message: '',
                     };
-        this.updateState = this.updateState.bind(this);
     }
 
-    toggle() {
+    toggle = () => {
         this.updateState({ collapse: !this.state.collapse });
     }
 
-    changeColor(rgb){
-        const category = this.state.category;
-        category.color = rgb.r+"-"+rgb.g+"-"+rgb.b+"-"+rgb.a;
-        this.updateState({category});
+    cancel = () =>{
+        this.updateState({ edit:false });
     }
 
-    editCategory(edit){
-        this.updateState({ edit });
+    editCategory = () => {
+        this.updateState({ edit:true, message: '' });
     }
 
-    updateState(field){
+    updateState = (field) => {
         let state = Object.assign({}, this.state, field);
         this.setState(state);
+    }
+
+    updateCategory = (category) =>{
+        this.props.update(category,
+            (response) => {
+                if(response.success){
+                    this.cancel();
+                }else{
+                    this.setState({message:response.message});
+                }
+            });
     }
 
     render() {
@@ -38,7 +47,7 @@ class Category extends Component {
         const styles = reactCSS({
             'default': {
                 color: {
-                    borderLeft: `0.25rem solid rgba(${this.state.category.color.split('-')[0]}, ${ this.state.category.color.split('-')[1] }, ${ this.state.category.color.split('-')[2] }, ${ this.state.category.color.split('-')[3]})`,
+                    borderLeft: `0.25rem solid rgba(${this.props.category.color.split('-')[0]}, ${ this.props.category.color.split('-')[1] }, ${ this.props.category.color.split('-')[2] }, ${ this.props.category.color.split('-')[3]})`,
                     cursor: 'pointer',
                 },
             },
@@ -46,12 +55,12 @@ class Category extends Component {
 
         return (
             <div className="card shadow mb-4 animation-grow-in">
-                <div style={styles.color} className={this.state.collapse ? "d-block card-header py-3 collapsed" : "d-block card-header py-3"}>
+                <div style={!this.state.edit ? styles.color : null} className={this.state.collapse ? "d-block card-header py-3 collapsed" : "d-block card-header py-3"}>
 
                     {   this.state.edit ? 
-                        <CategoryEdit category={this.state.category} changeColor={this.changeColor.bind(this)} 
-                        edit={this.editCategory.bind(this)} toggle={this.toggle.bind(this)} {...this.props}/>   
-                      : <CategoryShow category={this.state.category} edit={this.editCategory.bind(this)} toggle={this.toggle.bind(this)}/>   
+                        <CategoryEdit category={this.props.category} message={this.state.message}
+                         update={this.updateCategory} cancel={this.cancel} toggle={this.toggle} />   
+                      : <CategoryShow category={this.props.category} edit={this.editCategory} toggle={this.toggle.bind(this)}/>   
                     }    
                     
                 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Category from './Category';
 import CategoryApi from '../../business/CategoryApi';
 import CategoryCreate from './Category-create';
-import ReactDOM from 'react-dom';
 
 class Categories extends Component {
 
@@ -32,9 +31,8 @@ class Categories extends Component {
         this.props.store.dispatch(CategoryApi.insert(category));
     }
 
-    updateCategory = (category) => {
-        console.log(category);
-        //this.props.store.dispatch(CategoryApi.update(category));
+    updateCategory = (category, callback) => {
+        this.props.store.dispatch(CategoryApi.update(category,callback));
     }
 
     componentDidMount(){
@@ -45,18 +43,6 @@ class Categories extends Component {
         this.setState({create: !this.state.create});
     }
 
-    /*
-    unmountChild = () => {
-        
-        console.log("teste",ReactDOM.findDOMNode("categoryCreate"));
-
-        if(this.refs.categoryCreate){
-            let mountNode = ReactDOM.findDOMNode(this.refs.categoryCreate);
-            let unmount = ReactDOM.unmountComponentAtNode(mountNode);
-            console.log(unmount);
-        }
-    }
-*/
   render() {
     
     return (
@@ -96,7 +82,7 @@ class Categories extends Component {
 
                         { (this.state.categories && this.state.categories.length > 0) ?
                             this.state.categories.map(category => (<Category key={category.id} 
-                                category={category} updateCategory={this.updateCategory}/>))
+                                category={category} update={this.updateCategory}/>))
                             :
                             <div className="container">
                                 <div className="row justify-content-center m-5">

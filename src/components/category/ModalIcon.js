@@ -3,6 +3,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {getFontAwesomeBy} from '../../util/FontAwesome';
 
 class ModalIcon extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {

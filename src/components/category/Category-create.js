@@ -10,7 +10,7 @@ class CategoryCreate extends React.Component {
     this.state = {
       modal: true,
     };
-    
+
     this.icons = getFontAwesomeBy();
     this.toggle = this.toggle.bind(this);
     this.iconSelected = {className: ''};

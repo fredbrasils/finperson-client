@@ -18,9 +18,9 @@ export function category(state=[], action){
     }
 
     if(action.type === 'update'){
-        updated = action.response.success ? false : true;
-        let response = Object.assign({},state,{create, message:action.response.message, 
-            success: action.response.success,updated});
+        updated = action.category.success ? false : true;
+        let response = Object.assign({},state,{create, message:action.category.message, 
+            success: action.category.success,updated});
         return response;
     }
     
