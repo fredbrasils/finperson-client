@@ -60,7 +60,8 @@ class Category extends Component {
                     {   this.state.edit ? 
                         <CategoryEdit category={this.props.category} message={this.state.message}
                          update={this.updateCategory} cancel={this.cancel} toggle={this.toggle} />   
-                      : <CategoryShow category={this.props.category} edit={this.editCategory} toggle={this.toggle.bind(this)}/>   
+                      : <CategoryShow category={this.props.category} edit={this.editCategory} 
+                        remove={this.props.remove} toggle={this.toggle.bind(this)}/>   
                     }    
                     
                 

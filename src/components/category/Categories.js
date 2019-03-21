@@ -39,6 +39,10 @@ class Categories extends Component {
         this.loadCategories();
     }
 
+    removeCategory = (category) => {
+        this.props.store.dispatch(CategoryApi.remove(category));
+    }
+
     openCategoryModel = () =>{
         this.setState({create: !this.state.create});
     }
@@ -82,7 +86,7 @@ class Categories extends Component {
 
                         { (this.state.categories && this.state.categories.length > 0) ?
                             this.state.categories.map(category => (<Category key={category.id} 
-                                category={category} update={this.updateCategory}/>))
+                                category={category} update={this.updateCategory} remove={this.removeCategory}/>))
                             :
                             <div className="container">
                                 <div className="row justify-content-center m-5">

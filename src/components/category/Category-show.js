@@ -12,6 +12,11 @@ class CategoryShow extends Component {
         }
     }
 
+    removeCategory = () =>{
+        this.props.remove(this.props.category);
+    }
+
+
     render() {
     
         return (
@@ -28,7 +33,7 @@ class CategoryShow extends Component {
                     <a style={{cursor: 'pointer'}} onClick={this.edit} ><i className="fas fa-edit fa-2x"></i></a>
                 </div>
                 <div className="col-auto">
-                    <a style={{cursor: 'pointer'}}><i className="fas fa-trash-alt fa-2x"></i></a>
+                    <a style={{cursor: 'pointer'}} onClick={this.removeCategory}><i className="fas fa-trash-alt fa-2x"></i></a>
                 </div>
             </div>    
         );
