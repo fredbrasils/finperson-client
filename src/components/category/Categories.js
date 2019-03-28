@@ -10,6 +10,7 @@ class Categories extends Component {
         this.state = {categories:[], 
                       create:false,
                       updated: true};
+        this.categoriesBackup = [];
     }
 
     componentWillMount(){
@@ -17,6 +18,7 @@ class Categories extends Component {
             const resp = this.props.store.getState().category;
             this.setState(resp, () =>{
                 if(!resp.updated){
+                    this.categoriesBackup = [];
                     this.loadCategories();
                 }
             });
@@ -47,6 +49,29 @@ class Categories extends Component {
         this.setState({create: !this.state.create});
     }
 
+    filterCategory = (event) => {
+
+        if(this.categoriesBackup.length === 0){
+            this.categoriesBackup = this.state.categories;
+            this.search(event.target.value);
+        }else{
+            let keyValue = event.target.value;
+            let state = Object.assign({}, this.state, {categories:this.categoriesBackup});
+            this.setState(state, () =>{this.search(keyValue)});
+        }
+    }
+
+    search = (keyValue) => {
+
+        if(keyValue.length > 0){
+            const filtered = this.state.categories.filter( cat =>{
+                return cat.name.toLowerCase().includes(keyValue.toLowerCase());
+            });
+            let state = Object.assign({}, this.state, {categories:filtered});
+            this.setState(state);
+        }
+    }
+
   render() {
     
     return (
@@ -75,10 +100,8 @@ class Categories extends Component {
                     <div className="card-body p-4">
                         <div className="row ">
                             <div className="col-6">
-                                <input type="text" className="form-control" id="name" placeholder="Search..."/>
-                            </div>
-                            <div className="col-1">
-                                <button type="submit" className="btn btn-info"><i className="fas fa-search"></i></button>
+                                <input type="text" className="form-control" id="name" 
+                                    onKeyUp={this.filterCategory} placeholder="Search..."/>
                             </div>
                         </div>
                         

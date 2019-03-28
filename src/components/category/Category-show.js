@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 class CategoryShow extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     edit = () => {
         if(this.props.edit){
             this.props.edit(true);
